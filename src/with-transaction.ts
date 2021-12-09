@@ -5,10 +5,10 @@ export const withTransaction = async (
   action: (transaction: Transaction) => Promise<void>,
   {
     isolationLevel,
-    onError,
+    onTransactionError,
   }: {
     isolationLevel?: IIsolationLevel
-    onError?: (error: Error) => Promise<void> | void
+    onTransactionError?: (error: Error, transaction: Transaction) => Promise<void> | void
   } = {},
 ) => {
   const transaction = pool.transaction()
@@ -18,8 +18,8 @@ export const withTransaction = async (
     await action(transaction)
     await transaction.commit()
   } catch (err) {
-    if (onError) {
-      await onError(err as Error)
+    if (onTransactionError) {
+      await onTransactionError(err as Error, transaction)
     } else {
       await transaction.rollback()
       throw err
