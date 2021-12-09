@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint --max-warnings=0 src",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ts-mocha ./test/*.ts",
     "prepare": "husky install"
   },
   "repository": {
@@ -27,11 +27,13 @@
     "mssql": "^7.3.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.0",
     "@types/expect": "^24.3.0",
     "@types/mocha": "^9.0.0",
     "@types/mssql": "^7.1.4",
     "@typescript-eslint/eslint-plugin": "^5.6.0",
     "@typescript-eslint/parser": "^5.6.0",
+    "chai": "^4.3.4",
     "eslint": "^8.4.1",
     "husky": "^7.0.4",
     "lint-staged": "^12.1.2",
