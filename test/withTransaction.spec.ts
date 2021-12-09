@@ -4,24 +4,19 @@ import sinon from 'sinon'
 import { withTransaction } from '../src/with-transaction'
 
 describe('withTransaction tests', () => {
-  it('commits after the action is completed', async () => {
+  it.only('commits after the action is completed', async () => {
     const transaction = sinon.createStubInstance(Transaction)
-    sinon.stub(transaction)
-
     const connectionPool = sinon.createStubInstance(ConnectionPool, {
-      transaction: sinon.stub<[], Transaction>().returns(transaction),
-    })
+        transaction: sinon.stub<[], Transaction>().returns(transaction),
+      })
+    const action = sinon.stub().resolves()
+    await withTransaction(connectionPool, action)
 
-    // create mock function that is the action
-    const action = () => Promise.resolve()
-
-    await withTransaction(connectionPool, action, { isolationLevel: ISOLATION_LEVEL.SERIALIZABLE })
-
-    // make sure pool.transaction was called
-    // make sure begin was called
-    // action was performed
-    // commit was done
-    // order of begin/action/commit is correct
+    expect(connectionPool.transaction.called).to.be.true
+    expect(connectionPool.transaction.calledBefore(transaction.begin)).to.be.true
+    expect(transaction.begin.called).to.be.true
+    expect(transaction.begin.calledBefore(action)).to.be.true
+    expect(action.called).to.be.true
   })
   it('rolls back if the action throws')
   it('executes onTransactionError if the action throws')
