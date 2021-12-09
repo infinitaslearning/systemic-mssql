@@ -24,6 +24,23 @@ describe('withTransaction tests', () => {
     expect(transaction.commit).to.have.been.calledOnce
     expect(transaction.commit).to.have.been.calledAfter(action)
   })
-  it('rolls back if the action throws')
-  it('executes onTransactionError if the action throws')
+
+  it('rolls back if the action throws', async () => {
+    const transaction = sinon.createStubInstance(Transaction)
+    const connectionPool = sinon.createStubInstance(ConnectionPool, {
+      transaction: sinon.stub<[], Transaction>().returns(transaction),
+    })
+    const action = () => Promise.reject('my-exception')
+    const test = async () => await withTransaction(connectionPool, action)
+
+    expect(test()).to.be.rejectedWith('my-exception')
+
+    expect(connectionPool.transaction).to.have.been.calledOnce
+    expect(connectionPool.transaction).to.have.been.calledBefore(transaction.begin)
+
+    expect(transaction.begin).to.have.been.calledOnce
+
+    expect(transaction.rollback).to.have.been.calledOnce
+    expect(transaction.rollback).to.have.been.calledAfter(transaction.begin)
+  })
 })

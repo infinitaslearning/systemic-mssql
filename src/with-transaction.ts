@@ -5,7 +5,10 @@ export const withTransaction = async (
   action: (transaction: Transaction) => Promise<void>,
   {
     isolationLevel,
-    onTransactionError,
+    onTransactionError = async (error, transaction) => {
+      await transaction.rollback()
+      throw error
+    },
   }: {
     isolationLevel?: IIsolationLevel
     onTransactionError?: (error: Error, transaction: Transaction) => Promise<void> | void
@@ -18,11 +21,6 @@ export const withTransaction = async (
     await action(transaction)
     await transaction.commit()
   } catch (err) {
-    if (onTransactionError) {
-      await onTransactionError(err as Error, transaction)
-    } else {
-      await transaction.rollback()
-      throw err
-    }
+    onTransactionError(err as Error, transaction)
   }
 }
