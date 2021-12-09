@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "lib": ["es2015"],
     "rootDir": "./src",
-    "baseUrl": "./src",
+    "declaration": true
   },
   "include": ["**/*"],
   "exclude": ["node_modules", "dist", "test"]
