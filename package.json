@@ -1,0 +1,30 @@
+{
+  "name": "@infinitas/systemic-mssql",
+  "version": "1.0.0",
+  "description": "Systemic component to connect to Mssql",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/infinitaslearning/systemic-mssql.git"
+  },
+  "keywords": [
+    "systemic",
+    "mssql"
+  ],
+  "author": "Infinitaslearning",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/infinitaslearning/systemic-mssql/issues"
+  },
+  "homepage": "https://github.com/infinitaslearning/systemic-mssql#readme",
+  "dependencies": {
+    "mssql": "^7.3.0"
+  },
+  "devDependencies": {
+    "@types/mssql": "^7.1.4",
+    "systemic": "guidesmiths/systemic#pull/51/head"
+  }
+}
