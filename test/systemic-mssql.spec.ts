@@ -1,6 +1,7 @@
 import { expect } from 'chai'
 import mssql, { ConnectionPool, Request } from 'mssql'
 import sinon from 'sinon'
+import { sql } from '../src/sql'
 
 import { initDb } from '../src/systemic-mssql'
 
@@ -51,6 +52,44 @@ describe('systemic-mssql test', () => {
     })
   })
 
+  describe('query', () => {
+    it('executes the query, returning its result', async () => {
+      const queryResult = 'query result'
+      const connectionPool = sinon.createStubInstance(ConnectionPool)
+      connectionPool.query.resolves(queryResult)
+      sinon.stub(mssql, 'ConnectionPool').returns(connectionPool)
+
+      const component = initDb()
+      const { query } = await component.start({ config: { connection: 'my connection string' } })
+
+      const id = 1
+      const qry = sql`SELECT * FROM dummy WHERE id = ${id}`
+
+      const result = await query(qry)
+
+      expect(result).to.equal(queryResult)
+      expect(connectionPool.query).to.have.been.calledOnceWith(qry.query, ...qry.args)
+    })
+
+    it('executes the query string, returning its result', async () => {
+      const queryResult = 'query result'
+      const connectionPool = sinon.createStubInstance(ConnectionPool)
+      connectionPool.query.resolves(queryResult)
+      sinon.stub(mssql, 'ConnectionPool').returns(connectionPool)
+
+      const component = initDb()
+      const { query } = await component.start({ config: { connection: 'my connection string' } })
+
+      const id = 1
+      const qry = sql`SELECT * FROM dummy WHERE id = ${id}`
+
+      const result = await query`SELECT * FROM dummy WHERE id = ${id}`
+
+      expect(result).to.equal(queryResult)
+      expect(connectionPool.query).to.have.been.calledOnceWith(qry.query, ...qry.args)
+    })
+  })
+
   describe('request', () => {
     it('returns a request from the connection pool', async () => {
       const req = sinon.createStubInstance(Request)
@@ -59,10 +98,8 @@ describe('systemic-mssql test', () => {
       })
       sinon.stub(mssql, 'ConnectionPool').returns(connectionPool)
 
-      const connection = 'my connection string'
       const component = initDb()
-
-      const { request } = await component.start({ config: { connection } })
+      const { request } = await component.start({ config: { connection: 'my connection string' } })
 
       const result = request()
 
@@ -76,10 +113,8 @@ describe('systemic-mssql test', () => {
       const connectionPool = sinon.createStubInstance(ConnectionPool)
       sinon.stub(mssql, 'ConnectionPool').returns(connectionPool)
 
-      const connection = 'my connection string'
       const component = initDb()
-
-      const { onError } = await component.start({ config: { connection } })
+      const { onError } = await component.start({ config: { connection: 'my connection string' } })
       const callback = 'my-callback' as unknown as () => void
 
       onError(callback)
