@@ -31,6 +31,7 @@ export const streamingQuery = async function* <TEntity = any>(
     done = true
     resolve()
   })
+
   request.query<TEntity>(query.query, ...query.args)
 
   while (!done) {
