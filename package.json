@@ -45,7 +45,7 @@
     "prettier": "^2.5.1",
     "sinon": "^12.0.1",
     "sinon-chai": "^3.7.0",
-    "systemic": "guidesmiths/systemic#pull/51/head",
+    "systemic": "^3.3.10",
     "ts-mocha": "^8.0.0",
     "typescript": "^4.5.2"
   },
