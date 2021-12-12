@@ -23,7 +23,7 @@ export type Database = {
    * @param options Set the size to change the maximum number of records that will be cached, defaults to 1000
    * @returns An async iterable iterator yielding the result one row at a time.
    */
-  streamingQuery<TEntity = any>(query: SqlQuery<TEntity>, options: { size?: number }): AsyncIterableIterator<TEntity>
+  streamingQuery<TEntity = any>(query: SqlQuery<TEntity>, options?: { size?: number }): AsyncIterableIterator<TEntity>
   streamingQuery<TEntity = any>(strings: TemplateStringsArray, ...interpolations: any[]): AsyncIterableIterator<TEntity>
 
   /**
@@ -33,7 +33,7 @@ export type Database = {
     action: (transaction: Transaction) => Promise<void>,
     options?: {
       isolationLevel?: IIsolationLevel
-      onError?: (error: Error) => Promise<void> | void
+      onTransactionError?: (error: Error) => Promise<void> | void
     },
   ) => Promise<void>
 

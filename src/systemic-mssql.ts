@@ -14,14 +14,14 @@ const startConnection = async (config: Config) => {
 const isSqlQuery = <TResult = unknown>(query: SqlQuery<TResult> | TemplateStringsArray): query is SqlQuery<TResult> =>
   'query' in query
 
-  /**
-   * Initializes a Systemic mssql Component
-   */
+/**
+ * Initializes a Systemic mssql Component
+ */
 export const initDb = (): Component<Database, { config: Config }> => {
   let pool: ConnectionPool
 
   return {
-    start: async ({ config }) => {
+    start: async ({ config }): Promise<Database> => {
       pool = await startConnection(config)
 
       return {
