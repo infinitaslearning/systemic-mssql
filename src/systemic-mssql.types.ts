@@ -33,7 +33,7 @@ export type Database = {
     action: (transaction: Transaction) => Promise<void>,
     options?: {
       isolationLevel?: IIsolationLevel
-      onTransactionError?: (error: Error) => Promise<void> | void
+      onTransactionError?: (error: Error, transaction: Transaction) => Promise<void> | void
     },
   ) => Promise<void>
 

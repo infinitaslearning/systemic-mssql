@@ -115,8 +115,42 @@ const initBooksDomain = (store: BookStore) => ({
 
 ### Transactions
 
+The withTransaction function allows you to write clean code that's bundled in a single transaction that's automatically commited on success. By default the entire transaction is rolled back on error, but that behaviour can be overriden by providing and onTransactionError callback.
+
 ```typescript
-//TODO: provide example
+import { Database } from '@infinitas/systemic-mssql'
+
+const initStore = (database: Database) => ({
+  doSomething: () => {
+    database.withTransaction((transaction) => {
+      const request = transaction.request()
+      // ... execute mulitple request within same transaction and/or include other related logic
+    })
+  },
+})
+```
+
+WithTransaction throws if an error occures while connecting to the database or starting the transaction, therefore in the error callback it's safe to assume that there's an active database connection.
+
+```typescript
+import { Database } from '@infinitas/systemic-mssql'
+import { ISOLATION_LEVEL } from 'mssql'
+
+const initStore = (database: Database) => ({
+  doSomething: () => {
+    database.withTransaction(
+      (transaction) => {
+        // normal transaction flow
+      },
+      {
+        isolationLevel: ISOLATION_LEVEL.READ_UNCOMMITTED,
+        onTransactionError: (error, transaction) => {
+          // mitigating actions
+        },
+      },
+    )
+  },
+})
 ```
 
 ### Error handling
