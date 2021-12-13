@@ -21,6 +21,6 @@ export const withTransaction = async (
     await action(transaction)
     await transaction.commit()
   } catch (err) {
-    onTransactionError(err as Error, transaction)
+    await onTransactionError(err as Error, transaction)
   }
 }

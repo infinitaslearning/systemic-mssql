@@ -34,7 +34,7 @@ describe('withTransaction tests', () => {
     const action = sinon.stub().rejects(error)
     const test = async () => await withTransaction(connectionPool, action)
 
-    expect(test()).to.be.rejectedWith(error)
+    await expect(test()).to.be.rejectedWith(error)
 
     expect(connectionPool.transaction).to.have.been.calledOnce
     expect(connectionPool.transaction).to.have.been.calledBefore(transaction.begin)
