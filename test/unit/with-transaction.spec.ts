@@ -1,7 +1,7 @@
 import { ConnectionPool, ISOLATION_LEVEL, Transaction } from 'mssql'
 import { expect } from 'chai'
 import sinon from 'sinon'
-import { withTransaction } from '../src/with-transaction'
+import { withTransaction } from '../../src/with-transaction'
 
 describe('withTransaction tests', () => {
   it('commits after the action is completed', async () => {

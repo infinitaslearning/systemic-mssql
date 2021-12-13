@@ -1,11 +1,11 @@
 import { expect } from 'chai'
 import mssql, { ConnectionPool, Request } from 'mssql'
 import sinon from 'sinon'
-import { sql } from '../src/sql'
-import * as streamingQueryModule from '../src/streaming-query'
-import * as withTransactionModule from '../src/with-transaction'
+import { sql } from '../../src/sql'
+import * as streamingQueryModule from '../../src/streaming-query'
+import * as withTransactionModule from '../../src/with-transaction'
 
-import { initDb } from '../src/systemic-mssql'
+import { initDb } from '../../src/systemic-mssql'
 
 describe('systemic-mssql test', () => {
   describe('start', () => {

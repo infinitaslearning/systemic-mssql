@@ -1,4 +1,4 @@
-import { sql } from '../src/sql'
+import { sql } from '../../src/sql'
 import { expect } from 'chai'
 
 describe('sql tests', () => {

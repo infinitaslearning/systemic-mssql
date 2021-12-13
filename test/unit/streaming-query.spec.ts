@@ -3,8 +3,8 @@
 import { expect } from 'chai'
 import { ConnectionPool, Request } from 'mssql'
 import sinon from 'sinon'
-import { sql } from '../src/sql'
-import { streamingQuery } from '../src/streaming-query'
+import { sql } from '../../src/sql'
+import { streamingQuery } from '../../src/streaming-query'
 
 const getEvents = (
   request: sinon.SinonStubbedInstance<Request>,

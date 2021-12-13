@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "lint": "eslint --max-warnings=0 src",
-    "test": "ts-mocha ./test/*.ts",
+    "test:unit": "ts-mocha ./test/unit/*.ts",
+    "test": "npm run test:unit",
     "prepare": "husky install"
   },
   "repository": {
