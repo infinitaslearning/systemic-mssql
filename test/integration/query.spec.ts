@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import System, { Systemic } from 'systemic'
 
-import { addBooks, Book, systemicConfig } from './environment/test-helpers'
+import { addBooks, Book, systemicConfig } from './test-helpers'
 import initDb, { Database } from '../../src'
 
 describe('query tests', () => {
@@ -15,7 +15,7 @@ describe('query tests', () => {
 
   afterEach(() => system.stop())
 
-  it('query something', async () => {
+  it('it queries the database', async () => {
     const books = [
       { id: 1, title: 'Test' },
       { id: 2, title: 'Test2' },
