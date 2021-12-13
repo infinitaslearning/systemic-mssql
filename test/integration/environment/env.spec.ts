@@ -25,5 +25,5 @@ after(async () => {
   const request = pool.request()
   await request.batch('USE master')
   await request.batch(`DROP DATABASE ${dbConfig.database}`)
-  pool.close()
+  await pool.close()
 })

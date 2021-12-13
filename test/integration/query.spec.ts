@@ -1,7 +1,7 @@
 import { expect } from 'chai'
 import System, { Systemic } from 'systemic'
 
-import { addBooks, Book, systemicConfig } from './test-helpers'
+import { addBooks, Book, systemicConfig } from './environment/test-helpers'
 import initDb, { Database } from '../../src'
 
 describe('query tests', () => {
