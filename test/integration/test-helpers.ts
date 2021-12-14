@@ -26,6 +26,10 @@ export const addBooks = (books: Book[]) => {
   return request.bulk(table)
 }
 
+export const generateBooks = (count: number) => {
+  return new Array(count).fill(0).map((_, index) => ({ id: index, title: `Book ${index}` }))
+}
+
 export const removeAllBooks = () => {
   const request = new sql.Request()
   return request.batch('TRUNCATE TABLE Books')

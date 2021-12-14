@@ -1,7 +1,11 @@
+import chai from 'chai'
+import chaiAsPromised from 'chai-as-promised'
 import { after, before } from 'mocha'
 import sql, { ConnectionPool } from 'mssql'
 
 import { dbConfig, removeAllBooks } from './test-helpers'
+
+chai.use(chaiAsPromised)
 
 let pool: ConnectionPool
 
