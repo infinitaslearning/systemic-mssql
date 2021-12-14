@@ -13,7 +13,5 @@ jobs:
           node-version: '16.x'
       - run: npm ci
       - run: npm run test:ci
-    #steps:
       # version bump
-    #steps:
-      #publish to NPM
+      #publish to NPMe
