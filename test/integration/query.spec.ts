@@ -25,7 +25,7 @@ describe('query tests', () => {
     const result = await testDb.query<Book>`SELECT * FROM Books`
 
     expect(result.recordset).to.deep.equal([
-      { id: 1, title: 'Test1' },
+      { id: 1, title: 'Test' },
       { id: 2, title: 'Test2' },
     ])
   })
