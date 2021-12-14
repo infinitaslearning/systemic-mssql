@@ -1,4 +1,4 @@
-name: Pre merge
+name: Publish
 on:
   push:
     branches:
