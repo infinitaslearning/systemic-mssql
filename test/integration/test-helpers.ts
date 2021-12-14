@@ -8,7 +8,7 @@ export type Book = {
 export const dbConfig: config = {
   server: 'localhost',
   user: 'sa',
-  password: '$KCM_qJ2eWCYcho4.nV-V@_D',
+  password: 'GxtjDzMhNq2K2AKDPAuaNLds$',
   options: { trustServerCertificate: true },
   database: 'TestDb',
 }

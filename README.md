@@ -1,4 +1,4 @@
-# @infinitas/systemic-mssql
+# @infinitaslearning/systemic-mssql
 
 Systemic mssql is a [systemic component](https://github.com/guidesmiths/systemic) for the [MS SQL](https://github.com/tediousjs/node-mssql). Its goal is to help you connect to a MS SQL database.
 
@@ -18,7 +18,7 @@ We've created this library as an alternative to the existing [systemic-mssql](ht
 
 ```typescript
 import System from 'systemic'
-import initDb from '@infinitas/systemic-mssql'
+import initDb from '@infinitaslearning/systemic-mssql'
 
 new System()
   .configure({
@@ -40,7 +40,7 @@ Connection in the configuration can either be a mssql connection string or a ful
 ### Query
 
 ```typescript
-import { Database } from '@infinitas/systemic-mssql'
+import { Database } from '@infinitaslearning/systemic-mssql'
 
 interface Book {
   id: string
@@ -58,7 +58,7 @@ const initBookStore = (database: Database) => ({
 or
 
 ```typescript
-import { Database } from '@infinitas/systemic-mssql'
+import { Database } from '@infinitaslearning/systemic-mssql'
 import { bookQuery } from './queries'
 
 const initBookStore = (database: Database) => ({
@@ -71,7 +71,7 @@ All query functions use mssql [tagged template literals](https://github.com/tedi
 ### Re-usable queries
 
 ```typescript
-import { sql } from '@infinitas/systemic-mssql'
+import { sql } from '@infinitaslearning/systemic-mssql'
 
 interface Book {
   id: string
@@ -90,7 +90,7 @@ If you plan to work with large amount of rows, you should always use streaming t
 The streamingQuery function wraps the [mssql streaming capability](https://github.com/tediousjs/node-mssql#streaming) and exposes it as an easy to use async iterable.
 
 ```typescript
-import { Database, sql } from '@infinitas/systemic-mssql'
+import { Database, sql } from '@infinitaslearning/systemic-mssql'
 
 const initBookStore = (database: Database) => ({
   getBooks: () => database.streamingQuery(sql`SELECT * FROM Books`, { size: 500 }),
@@ -118,7 +118,7 @@ const initBooksDomain = (store: BookStore) => ({
 The withTransaction function allows you to write clean code that's bundled in a single transaction that's automatically commited on success. By default the entire transaction is rolled back on error, but that behaviour can be overriden by providing and onTransactionError callback.
 
 ```typescript
-import { Database } from '@infinitas/systemic-mssql'
+import { Database } from '@infinitaslearning/systemic-mssql'
 
 const initStore = (database: Database) => ({
   doSomething: () => {
@@ -133,7 +133,7 @@ const initStore = (database: Database) => ({
 WithTransaction throws if an error occures while connecting to the database or starting the transaction, therefore in the error callback it's safe to assume that there's an active database connection.
 
 ```typescript
-import { Database } from '@infinitas/systemic-mssql'
+import { Database } from '@infinitaslearning/systemic-mssql'
 import { ISOLATION_LEVEL } from 'mssql'
 
 const initStore = (database: Database) => ({
@@ -173,7 +173,7 @@ system.start((err, components) => {
 For advanced scenarios that are not supported by any of the functions, the raw mssql Request is also available from this component:
 
 ```typescript
-import { Database } from '@infinitas/systemic-mssql'
+import { Database } from '@infinitaslearning/systemic-mssql'
 
 const initBookStore = (database: Database) => ({
   doAdvancedStuff: () => {

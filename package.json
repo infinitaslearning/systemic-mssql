@@ -1,5 +1,5 @@
 {
-  "name": "@infinitas/systemic-mssql",
+  "name": "@infinitaslearning/systemic-mssql",
   "version": "1.0.0",
   "description": "Systemic component to connect to Mssql",
   "main": "dist/index.js",
@@ -10,8 +10,8 @@
     "test:unit": "ts-mocha ./test/unit/*.ts",
     "test": "npm run test:unit && npm run test:integration",
     "prepare": "husky install",
-    "docker": "docker run --name mssql-test-env -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=$KCM_qJ2eWCYcho4.nV-V@_D\" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest",
-    "test:ci": "npm run docker && docker exec mssql-test-env /bin/sh -c \"while [ 1 ]; do /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P '$KCM_qJ2eWCYcho4.nV-V@_D' -Q 'select 1 from sys.databases where 1 > 2' && break ; sleep 5; done\" && npm t"
+    "docker": "docker run --name mssql-test-env -e \"ACCEPT_EULA=Y\" -e \"SA_PASSWORD=GxtjDzMhNq2K2AKDPAuaNLds$\" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2019-latest",
+    "test:ci": "npm run docker && docker exec mssql-test-env /bin/sh -c \"while [ 1 ]; do /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P 'GxtjDzMhNq2K2AKDPAuaNLds$' -Q 'select 1 from sys.databases where 1 > 2' && break ; sleep 5; done\" && npm t"
   },
   "repository": {
     "type": "git",
