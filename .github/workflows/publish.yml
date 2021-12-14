@@ -4,7 +4,7 @@ on:
     branches:
       - main
 jobs:
-  build:
+  publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -13,3 +13,7 @@ jobs:
           node-version: '16.x'
       - run: npm ci
       - run: npm run test:ci
+    #steps:
+      # version bump
+    #steps:
+      #publish to NPM
