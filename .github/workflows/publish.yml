@@ -12,11 +12,12 @@ jobs:
         with:
           node-version: '16.x'
       - run: npm ci
+      - run: npm run build
       - run: npm run test:ci
       - run: git config --global user.email "github@infinitaslearning.com"
       - run: git config --global user.name "Infinitas Learning"
+      - run: npm config set '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_TOKEN_TEUN }}"
       - run: npm version `npm pkg get version | tr -d '"' | cut -d '.' -f 1-2`.${{ github.run_number }}
-      - run: npm run build
       - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN_TEUN}}
