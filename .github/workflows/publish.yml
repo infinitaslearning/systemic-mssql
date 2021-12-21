@@ -13,7 +13,7 @@ jobs:
           node-version: '16.x'
       - run: npm ci
       - run: npm run test:ci
-    #steps:
-      # version bump
-    #steps:
-      #publish to NPM
+      - run: npm version `npm pkg get version | tr -d '"' | cut -d '.' -f 1-2`.${{ github.run_number }}
+      - run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN_TEUN}}
