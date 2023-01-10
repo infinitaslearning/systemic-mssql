@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/infinitaslearning/systemic-mssql#readme",
   "dependencies": {
-    "mssql": "^7.3.0"
+    "mssql": "^9.0.1"
   },
   "devDependencies": {
     "@types/chai": "^4.3.0",
